@@ -1,0 +1,20 @@
+{
+  "name": "votee-canary",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "stop": "docker-compose down",
+    "server:dev": "wait-on tcp:6379 && npm run start:dev --workspace=server",
+    "start": "concurrently 'npm:docker:compose' 'npm:server:dev'",
+    "docker:compose": "docker-compose up -d"
+  },
+  "workspaces": [
+    "client",
+    "server",
+    "shared"
+  ],
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
