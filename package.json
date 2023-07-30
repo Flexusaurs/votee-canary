@@ -3,17 +3,16 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "workspaces":["server","shared"],
   "scripts": {
-    "stop": "docker-compose down",
+    "docker:compose": "docker-compose up -d",
+    "client:dev": "npm run dev --workspace=client",
     "server:dev": "wait-on tcp:6379 && npm run start:dev --workspace=server",
-    "start": "concurrently 'npm:docker:compose' 'npm:server:dev'",
-    "docker:compose": "docker-compose up -d"
+    "start": "concurrently 'npm:docker:compose' 'npm:server:dev' 'npm:client:dev'",
+    "storybook": "npm run storybook --workspace=client",
+    "stop": "docker-compose down",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "workspaces": [
-    "client",
-    "server",
-    "shared"
-  ],
   "keywords": [],
   "author": "",
   "license": "ISC"

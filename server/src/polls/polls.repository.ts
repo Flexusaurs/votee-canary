@@ -5,7 +5,7 @@ import { ConfigService } from '@nestjs/config';
 import { Redis, Command } from 'ioredis';
 import { IORedisKey } from '../redis.module';
 import { AddParticipantRepositoryData, CreatePollRepositoryData } from './types';
-import { Poll } from '../../../shared/poll-types';
+import { Poll } from './../../../shared/poll-types';
 
 
 @Injectable()
@@ -26,7 +26,7 @@ export class PollsRepository {
     topic,
     pollID,
     userID,
-  }: CreatePollRepositoryData): Promise<Poll> {
+  }: CreatePollRepositoryData):Promise<Poll> {
     const initialPoll = {
       id: pollID,
       topic,
@@ -59,7 +59,7 @@ export class PollsRepository {
     }
   }
 
-  async getPoll(pollID: string): Promise<Poll> {
+  async getPoll(pollID: string):Promise<Poll> {
     this.logger.log(`Attempting to get poll with: ${pollID}`);
 
     const key = `polls:${pollID}`;
@@ -88,7 +88,7 @@ export class PollsRepository {
     pollID,
     userID,
     name,
-  }: AddParticipantRepositoryData): Promise<Poll> {
+  }: AddParticipantRepositoryData):Promise<Poll> {
     this.logger.log(
       `Attempting to add a participant with userID/name: ${userID}/${name} to pollID: ${pollID}`,
     );
